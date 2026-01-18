@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  # 1. 백엔드 (상품 서버)
+  backend:
+    build: ./services/product-service
+    ports:
+      - "4000:4000"
+
+  # 2. 프론트엔드 (방송 화면)
+  frontend:
+    build: ./apps/web-frontend
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend # 백엔드가 켜진 뒤에 실행하라
