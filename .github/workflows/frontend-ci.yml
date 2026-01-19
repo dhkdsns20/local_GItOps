@@ -4,8 +4,8 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'services/product-service/**' # 백엔드 코드가 바뀔 때만 실행
-      - '.github/workflows/backend-ci.yml'
+      - 'apps/web-frontend/**'          # 👈 [수정 1] 프론트엔드 경로로 변경!
+      - '.github/workflows/frontend-ci.yml'
 
 jobs:
   build-and-deploy:
@@ -23,7 +23,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    # 3. 이미지 태그 생성 (시간 기반 + 커밋 해시 앞 7자리)
+    # 3. 이미지 태그 생성
     - name: Set image tag
       id: vars
       run: echo "TAG=$(date +%s)-$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
@@ -32,22 +32,18 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v4
       with:
-        context: ./apps/web-frontend # Dockerfile이 있는 위치
+        context: ./apps/web-frontend      # 프론트엔드 빌드 경로 (정상)
         push: true
-        # 주의: 본인 DockerHub ID로 변경 필요하지만, secrets를 썼다면 아래 형식 유지
         tags: ${{ secrets.DOCKER_USERNAME }}/web-frontend:${{ steps.vars.outputs.TAG }}
 
     # 5. k8s YAML 파일 수정 (이미지 태그 업데이트)
     - name: Update Kubernetes Manifest
       run: |
-        # k8s/backend.yaml 파일에서 image: 부분을 찾아서 새 태그로 변경
-        # 기존: image: product-service:local 또는 다른 태그
-        # 변경: image: dockerhub-id/product-service:새로운태그
-        
         cd k8s
-        sed -i "s|image: .*|image: ${{ secrets.DOCKER_USERNAME }}/product-service:${{ steps.vars.outputs.TAG }}|g" frontend.yaml
+        # 👈 [수정 2] product-service를 web-frontend로 변경!
+        sed -i "s|image: .*|image: ${{ secrets.DOCKER_USERNAME }}/web-frontend:${{ steps.vars.outputs.TAG }}|g" frontend.yaml
         
-        # 변경 확인 (디버깅용)
+        # 변경 확인
         cat frontend.yaml
 
     # 6. 변경된 YAML 파일을 GitHub에 다시 커밋 & 푸시
@@ -57,6 +53,6 @@ jobs:
         git config --global user.name "GitHub Actions"
         
         git add k8s/frontend.yaml
-        git commit -m "Update backend image tag to ${{ steps.vars.outputs.TAG }}"
+        git commit -m "Update frontend image tag to ${{ steps.vars.outputs.TAG }}"
         git pull origin main --rebase
         git push
