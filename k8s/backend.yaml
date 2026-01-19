@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: backend      # Pod 안에서 실행될 컨테이너 이름
-          image: tenma2/product-service:1768796461-d710edf
+          image: tenma2/product-service:1768797703-da5241c
           imagePullPolicy: Always # 중요! 항상 저장소에서 다운로드 받도록 변경 (기존 Never)
           ports:
             - containerPort: 4000
