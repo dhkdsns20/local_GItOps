@@ -9,7 +9,7 @@ app.use(express.json());
 
 // ★ 서버 메모리에 저장된 "진짜 재고" (DB 대용)
 let products = {
-  1: { id: 1, name: '나이키 한정판 슈즈', price: 129000, stock: 5 },
+  1: { id: 1, name: '나이키 한정판 슈즈', price: 139000, stock: 5 },
   2: { id: 2, name: '봄맞이 메이크업 세트', price: 89000, stock: 10 },
   3: { id: 3, name: '개발자용 기계식 키보드', price: 155000, stock: 3 },
 };

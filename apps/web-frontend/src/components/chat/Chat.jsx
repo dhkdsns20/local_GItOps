@@ -37,11 +37,12 @@ const Chat = () => {
 
       {/* 2. 입력창 및 전송 버튼 */}
       <form onSubmit={handleSendMessage} style={{ 
-        padding: '15px', 
-        borderTop: '1px solid #eee', 
-        display: 'flex',             
-        alignItems: 'center',        
-        gap: '10px'                  
+          padding: '15px', 
+          borderTop: '1px solid #eee', 
+          display: 'flex',           // 가로 배치 핵심
+          flexDirection: 'row',      // 가로 방향 명시
+          alignItems: 'center', 
+          gap: '10px' 
       }}>
         <input
           type="text"
@@ -60,8 +61,8 @@ const Chat = () => {
         <button 
           type="submit" 
           style={{ 
-            // [수정] 파란색(#007bff) -> 올리브영 초록색(#9bce26)으로 변경
-            backgroundColor: '#9bce26', 
+            // [수정] 파란색(#007bff) -> 올리브영 초록색(#82DC28)으로 변경
+            backgroundColor: '#82DC28', 
             color: 'white', 
             border: 'none', 
             padding: '10px 20px', 
