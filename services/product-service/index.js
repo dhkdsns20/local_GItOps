@@ -47,4 +47,5 @@ app.post('/orders', (req, res) => {
 // 서버 시작
 app.listen(PORT, () => {
   console.log(`🚀 쇼핑몰 서버가 http://localhost:${PORT} 에서 실행 중입니다!`);
+  console.log("CI/CD Test Trigger!");
 });
