@@ -40,12 +40,7 @@ spec:
   selector:
     app: backend             # app=backend 라벨을 가진 Pod로 트래픽 전달
   ports:
-<<<<<<< HEAD
     - protocol: TCP          # TCP 통신 사용
       port: 4000             # 외부에서 접근할 포트
       targetPort: 4000       # Pod 내부 컨테이너 포트로 연결
-=======
-    - protocol: TCP
-      port: 4000      # 외부(로컬)에서 접근할 포트
-      targetPort: 4000
->>>>>>> 9b87cc6a83a715f21465340cafb3b0800c3c0f4a
+
