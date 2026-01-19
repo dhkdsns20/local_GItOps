@@ -59,6 +59,4 @@ jobs:
         git add k8s/frontend.yaml
         git commit -m "Update backend image tag to ${{ steps.vars.outputs.TAG }}"
 
-        # 서버의 최신 내용을 받아옴
-        git pull origin main --rebase 
         git push
