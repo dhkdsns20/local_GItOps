@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'apps/web-frontend/**'          # 👈 [수정 1] 프론트엔드 경로로 변경
+      - 'apps/web-frontend/**'          #  [수정 1] 프론트엔드 경로로 변경
       - '.github/workflows/frontend-ci.yml'
 
 jobs:
