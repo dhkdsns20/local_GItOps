@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: tenma2/web-frontend:1768795977-42a7d51
+          image: tenma2/web-frontend:1768797704-da5241c
           imagePullPolicy: Always      # 중요! 로컬 이미지 사용 설정
 
           ports:
