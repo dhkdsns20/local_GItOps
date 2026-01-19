@@ -58,5 +58,5 @@ jobs:
         
         git add k8s/frontend.yaml
         git commit -m "Update backend image tag to ${{ steps.vars.outputs.TAG }}"
-
+        git pull origin main --rebase
         git push
